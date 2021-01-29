@@ -12,8 +12,14 @@ public class Main
 		frame1.setSize(500, 500);
 		frame1.setVisible(true);
 
-		// Panel
+		// Panel 1
 		JPanel panel1 = new JPanel(new GridLayout(2,2, 10,10));
+
+		// Panel 2
+		JPanel panel2 = new JPanel (new BorderLayout(10, 10));
+		ImageIcon cookie = new ImageIcon("cookie.jpeg", "Cookies, cookies everywhere.");
+		JLabel cookiePic = new JLabel(cookie);
+		panel2.add(cookiePic);
 
 		// Buttons
 		JButton submit = new JButton("Submit");
@@ -47,9 +53,13 @@ public class Main
 			}
 		}); // end of action listener
 
+		// label1
+		JLabel label1 = new JLabel("Array List");
+
 		panel1.add(submit);
 		panel1.add(remove);
 		panel1.add(clear);
+		panel1.add(label1);
 
 		frame1.getContentPane().add(panel1);
 		System.out.println("Finished rendering frame.");

@@ -55,13 +55,16 @@ public class Main
 
 		// label1
 		JLabel label1 = new JLabel("Array List");
+		JTextField whatToSubmit = new JTextField(10);
 
 		panel1.add(submit);
 		panel1.add(remove);
 		panel1.add(clear);
 		panel1.add(label1);
+		panel1.add(whatToSubmit);
 
-		frame1.getContentPane().add(panel1);
+		frame1.getContentPane().add(BorderLayout.NORTH, panel1);
+		frame1.getContentPane().add(BorderLayout.CENTER, panel2);
 		System.out.println("Finished rendering frame.");
 	} // main end
 } // class end

@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Main
 {
@@ -12,6 +13,9 @@ public class Main
 		frame1.setSize(500, 500);
 		frame1.setVisible(true);
 
+		// ArrayList
+		ArrayList<String> cookieTypes = new ArrayList<String>();
+
 		// Panel 1
 		JPanel panel1 = new JPanel(new GridLayout(2,2, 10,10));
 
@@ -20,6 +24,10 @@ public class Main
 		ImageIcon cookie = new ImageIcon("cookie.jpeg", "Cookies, cookies everywhere.");
 		JLabel cookiePic = new JLabel(cookie);
 		panel2.add(cookiePic);
+
+		// Text fields
+		JTextField whatToSubmit = new JTextField(10);
+		JTextField whatToRemove = new JTextField(10);
 
 		// Buttons
 		JButton submit = new JButton("Submit");
@@ -31,7 +39,12 @@ public class Main
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				System.out.println("Submitted.");
+				String submission = whatToSubmit.getText();
+				System.out.println("Submitted " + submission + "!");
+				if(!cookieTypes.contains(submission))
+				{
+					cookieTypes.add(submission);
+				}
 			}
 		}); // end of action listener
 
@@ -40,7 +53,16 @@ public class Main
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				System.out.println("Removed.");
+				String removal = whatToRemove.getText();
+				if(cookieTypes.contains(removal))
+				{
+					System.out.println("Removed " + removal + "!");
+					cookieTypes.remove(removal);
+				}
+				else
+				{
+					System.out.println(removal + " does not exist!");
+				}
 			}
 		}); // end of action listener
 
@@ -49,19 +71,27 @@ public class Main
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				System.out.println("Cleared.");
+				if(cookieTypes.size() > 0)
+				{
+					cookieTypes.clear();
+					System.out.println("Cleared array list!");
+				}
+				else
+				{
+					System.out.println("Array list does not have any items!");
+				}
 			}
 		}); // end of action listener
 
 		// label1
-		JLabel label1 = new JLabel("Array List");
-		JTextField whatToSubmit = new JTextField(10);
+		JLabel label1 = new JLabel("Types of Cookies");
 
+		panel1.add(clear);
 		panel1.add(submit);
 		panel1.add(remove);
-		panel1.add(clear);
 		panel1.add(label1);
 		panel1.add(whatToSubmit);
+		panel1.add(whatToRemove);
 
 		frame1.getContentPane().add(BorderLayout.NORTH, panel1);
 		frame1.getContentPane().add(BorderLayout.CENTER, panel2);

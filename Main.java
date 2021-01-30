@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.util.ArrayList;
+import javax.swing.text.Document;
 
 public class Main
 {
@@ -34,16 +35,27 @@ public class Main
 		JButton remove = new JButton("Remove");
 		JButton clear = new JButton("Clear");
 
+		// Label 1
+		JLabel label1 = new JLabel("Box 1 is submit, Box 2 is remove");
+		// Label 2
+		JLabel label2 = new JLabel("Cookie Types: ");
+
 		// Submit button
 		submit.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
 				String submission = whatToSubmit.getText();
-				System.out.println("Submitted " + submission + "!");
 				if(!cookieTypes.contains(submission))
 				{
 					cookieTypes.add(submission);
+					System.out.println("Submitted " + submission + "!");
+					label2.setText(refreshLabel(cookieTypes));
+					whatToSubmit.setText("");
+				}
+				else
+				{
+					System.out.println(submission + " already exists!");
 				}
 			}
 		}); // end of action listener
@@ -58,6 +70,8 @@ public class Main
 				{
 					System.out.println("Removed " + removal + "!");
 					cookieTypes.remove(removal);
+					label2.setText(refreshLabel(cookieTypes));
+					whatToRemove.setText("");
 				}
 				else
 				{
@@ -75,6 +89,7 @@ public class Main
 				{
 					cookieTypes.clear();
 					System.out.println("Cleared array list!");
+					label2.setText(refreshLabel(cookieTypes));
 				}
 				else
 				{
@@ -83,13 +98,11 @@ public class Main
 			}
 		}); // end of action listener
 
-		// label1
-		JLabel label1 = new JLabel("Types of Cookies");
-
 		panel1.add(clear);
 		panel1.add(submit);
 		panel1.add(remove);
 		panel1.add(label1);
+		panel1.add(label2);
 		panel1.add(whatToSubmit);
 		panel1.add(whatToRemove);
 
@@ -97,4 +110,14 @@ public class Main
 		frame1.getContentPane().add(BorderLayout.CENTER, panel2);
 		System.out.println("Finished rendering frame.");
 	} // main end
+
+	public static String refreshLabel(ArrayList<String> array)
+	{
+		String text = "Cookie Types: ";
+		for(int x = 0; x < array.size(); x++)
+		{
+			text = text + array.get(x) + ", ";
+		}
+		return text;
+	}
 } // class end
